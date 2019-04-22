@@ -1,13 +1,8 @@
 import React from 'react'
-import {gql} from 'apollo-boost'
 import {Mutation} from 'react-apollo'
+import { COMPLETE_TODO } from './queries' 
 
 
-const COMPLETE_TODO = gql`
-  mutation CompleteTodo($id: Int!) {
-    completeTodo(id: $id) @client
-  }
-`
 
 const Todo = ({todo}) => (    
       <Mutation mutation={COMPLETE_TODO} variables={{ id: todo.id}}>
