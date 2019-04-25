@@ -2,6 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import { GET_ALL_TODOS } from "../queries";
 import styled from "styled-components";
+import posed, { PoseGroup } from "react-pose";
 // Components
 import Todo from "./Todo";
 
@@ -15,6 +16,7 @@ const StyledUl = styled.ul`
     border-bottom: 1px solid ${({ theme }) => theme.color.lighterdark};
     padding: 15px 7px;
     display: flex;
+    margin-top: -50px;
     width: 100%;
     flex-wrap: wrap;
   }
@@ -23,11 +25,28 @@ const StyledUl = styled.ul`
   }
 `;
 
+const PosedTodo = posed(Todo)({
+  enter: {
+    opacity: 1,
+    marginTop: 0
+  },
+  exit: {
+    opacity: 0,
+    transfrom: "translateX(20px)"
+  }
+});
+
 const TodoList = () => (
   <StyledUl>
     <Query query={GET_ALL_TODOS}>
       {({ data }) => {
-        return data.todos.map(todo => <Todo key={todo.id} todo={todo} />);
+        return (
+          <PoseGroup>
+            {data.todos.map(todo => (
+              <PosedTodo key={todo.id} todo={todo} />
+            ))}
+          </PoseGroup>
+        );
       }}
     </Query>
   </StyledUl>

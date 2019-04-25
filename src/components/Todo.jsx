@@ -20,11 +20,11 @@ const StP = styled.p`
   font-size: ${({ theme }) => theme.fontSize.small};
 `;
 
-const Todo = ({ todo }) => {
+const Todo = React.forwardRef(({ todo }, ref) => {
   return (
     <Mutation mutation={COMPLETE_TODO} variables={{ id: todo.id }}>
       {completeTodo => (
-        <li>
+        <li ref={ref}>
           <LeftSide completed={todo.completed}>
             <h3>{todo.name}</h3>
             <StP>{todo.content}</StP>
@@ -36,6 +36,6 @@ const Todo = ({ todo }) => {
       )}
     </Mutation>
   );
-};
+});
 
 export default Todo;
