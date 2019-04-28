@@ -8,7 +8,11 @@ const AddTodo = () => {
   const [content, setContent] = useState("");
   const [name, setName] = useState("");
   const checkIfEmpty = insertTodo => {
-    if (name && content) insertTodo();
+    if (name && content) {
+      insertTodo();
+      setContent("");
+      setName("");
+    }
   };
   const enterDown = (e, insertTodo) =>
     e.key === "Enter" && checkIfEmpty(insertTodo);

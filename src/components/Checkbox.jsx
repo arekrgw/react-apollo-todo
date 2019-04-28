@@ -56,7 +56,7 @@ export default props => {
       <input
         type="checkbox"
         checked={props.checked}
-        onChange={e => props.onChange(e)}
+        onChange={props.complete}
         name={props.name}
       />
       <StyledCheckIndicator />

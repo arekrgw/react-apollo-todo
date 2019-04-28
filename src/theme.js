@@ -45,7 +45,7 @@ export const Layout = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 60%;
+  width: 40%;
   margin: 10px auto;
   padding: 15px;
   border-radius: 5px;
