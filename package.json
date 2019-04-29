@@ -1,6 +1,6 @@
 {
   "name": "react-with-apollo",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "apollo-boost": "^0.3.1",
@@ -10,7 +10,6 @@
     "react-adopt": "^0.6.0",
     "react-apollo": "^2.5.4",
     "react-dom": "^16.8.6",
-    "react-pose": "^4.0.8",
     "react-scripts": "2.1.8",
     "styled-components": "^4.2.0"
   },
