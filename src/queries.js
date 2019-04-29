@@ -28,3 +28,9 @@ export const DELETE_TODO = gql`
     deleteTodo(id: $id) @client
   }
 `;
+
+export const EDIT_TODO = gql`
+  mutation EditTodo($id: Int!, $value: String!, $type: String!) {
+    editTodo(id: $id, value: $value, type: $type) @client
+  }
+`;

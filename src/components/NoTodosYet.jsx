@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledP = styled.p`
-  color: ${({ theme }) => theme.color.lighterdark}
+  color: ${({ theme }) => theme.color.light}
   margin: 20px 0;
   font-size: ${({ theme }) => theme.fontSize.small}
   text-align: center

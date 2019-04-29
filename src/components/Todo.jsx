@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, memo } from "react";
 import { Mutation } from "react-apollo";
 import { COMPLETE_TODO, DELETE_TODO } from "../queries";
 import Checkbox from "./Checkbox";
@@ -8,19 +8,26 @@ import { adopt } from "react-adopt";
 import EditTodo from "./EditTodo";
 
 const LeftSide = styled.div`
-  width: 85%;
+  width: 80%;
   ${({ completed }) => completed && "text-decoration: line-through"}
+  ${({ theme }) => theme.media.sm} {
+    width: 85%;
+  }
 `;
 
 const RightSide = styled.div`
-  width: 15%;
+  width: 20%;
   display: flex;
   justify-content: space-around
   align-items: center;
+  ${({ theme }) => theme.media.sm} {
+    width: 15%
+  }
 `;
 
 const StP = styled.p`
   font-size: ${({ theme }) => theme.fontSize.small};
+  word-break: break-word;
 `;
 
 const Mutating = adopt({
@@ -36,26 +43,28 @@ const Mutating = adopt({
   )
 });
 
-const Todo = ({ todo }) => {
+const Todo = memo(({ todo }) => {
   const [isEditOpen, setEditOpen] = useState(false);
   const [configuration, setConfiguration] = useState({});
-
   const handleOpenEdit = (e, contentType) => {
     setEditOpen(true);
     const editConfiguration = {
       x: Math.floor(e.target.getBoundingClientRect().x),
       y: Math.floor(e.target.getBoundingClientRect().y),
-      width: Math.floor(e.target.getBoundingClientRect().width),
-      height: Math.floor(e.target.getBoundingClientRect().height),
+      width: e.target.getBoundingClientRect().width,
+      height: e.target.getBoundingClientRect().height,
       type: contentType,
-      value: e.target.innerHTML
+      value: e.target.innerHTML,
+      id: todo.id
     };
     setConfiguration(editConfiguration);
   };
 
   return (
     <Fragment>
-      {isEditOpen && <EditTodo config={configuration} />}
+      {isEditOpen && (
+        <EditTodo closeEdit={() => setEditOpen(false)} config={configuration} />
+      )}
       <Mutating id={todo.id}>
         {({ completeTodo, deleteTodo }) => (
           <li>
@@ -74,6 +83,6 @@ const Todo = ({ todo }) => {
       </Mutating>
     </Fragment>
   );
-};
+});
 
 export default Todo;

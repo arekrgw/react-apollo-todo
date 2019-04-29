@@ -15,6 +15,21 @@ export default {
       cache.writeData({ id, data });
       return null;
     },
+    editTodo(_, variables, { cache, getCacheKey }) {
+      const id = getCacheKey({ __typename: "Todo", id: variables.id });
+      const fragment = gql`
+        fragment editTodo on Todo {
+          name
+          content
+        }
+      `;
+      const todo = cache.readFragment({ fragment, id });
+      let data = {};
+      if (variables.type === "name") data = { ...todo, name: variables.value };
+      else data = { ...todo, content: variables.value };
+
+      cache.writeData({ id, data });
+    },
     insertTodo(_, variables, { cache }) {
       const GET_TODOS_AND_CURRENT_ID = gql`
         {

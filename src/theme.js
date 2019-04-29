@@ -15,6 +15,12 @@ export const themeSchema = {
     medium: "2rem",
     large: "3.2rem",
     extralarge: "4rem"
+  },
+  media: {
+    sm: `@media (min-width: 598px)`,
+    md: `@media (min-width: 725px)`,
+    lg: `@media (min-width: 910px)`,
+    xl: `@media (min-width: 1200px)`
   }
 };
 
@@ -33,6 +39,9 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
 
+  h3 {
+    font-size: 1.8rem;
+  }
   body {
     font-size: 1.6rem;
     color: ${({ theme }) => theme.color.light}
@@ -45,10 +54,24 @@ export const Layout = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 40%;
-  margin: 10px auto;
+  width: calc(100% - 20px);
+  margin: 10px 10px;
   padding: 15px;
   border-radius: 5px;
   background: ${({ theme }) => theme.color.lighterdark};
   box-shadow: 0 0 10px 7px #00000067;
+
+  ${({ theme }) => theme.media.sm} {
+    width: 90%;
+    margin: 10px auto;
+  }
+  ${({ theme }) => theme.media.md} {
+    width: 70%;
+  }
+  ${({ theme }) => theme.media.lg} {
+    width: 50%;
+  }
+  ${({ theme }) => theme.media.xl} {
+    width: 40%;
+  }
 `;
